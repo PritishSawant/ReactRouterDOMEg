@@ -9,6 +9,19 @@ class App extends React.Component {
     users: []
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const users = JSON.stringify(this.state.users)
+    localStorage.setItem("users",users);
+  }
+  
+  componentDidMount() {
+    const json = localStorage.getItem("users");
+    const users = JSON.parse(json);
+    this.setState({users: users})
+
+  }
+  
+
   getRecipe = async (e) => {
     e.preventDefault();
     const recipeName = e.target.elements.recipeName.value;
